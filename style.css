@@ -67,24 +67,22 @@
     background: black;
   }
 
-  .woman-light-box {
-
-  }
-
   .WomanLightImg {
       margin: 5%;
+      width: 80%;
   }
 
   .uh-oh-box {
     display: block;
     margin: auto;
-    width: 65%;
+    width: 100%;
     padding: 0px;
     justify-content: center;
  }
 
   .you-won-lost-box {
     width: 100%;
+    height: 100%;
     justify-content: center;
   }
 
@@ -112,7 +110,12 @@
   
  .UhOhImg {
      margin: 5%;
-     width: 65%;
+     width: 85%;
+ }
+
+ .youWonLostImg {
+     height: 100%;
+     margin: 5% 5% 5% 5%;
  }
 
   li {
@@ -124,12 +127,12 @@
   }
 
   .possible-answers {
-    margin: 0 0 0 2%;
+    margin: 0 0 0 5%;
     list-style-type: circle;
    }
 
    .correct-answer {
-    margin: 0;
+    margin: 0 0 0 2%;
     padding: 0; 
    }
 
@@ -156,7 +159,7 @@
   .button {
     cursor: pointer;
 	display: inline-block;
-    margin: 2%;
+    margin: 4%;
     width: 35%;
 	box-shadow: inset 0px 1px 0px 0px #ffffff;
 	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
