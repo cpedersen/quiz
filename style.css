@@ -82,7 +82,6 @@
 
   .you-won-lost-box {
     width: 100%;
-    height: 100%;
     justify-content: center;
   }
 
@@ -90,10 +89,6 @@
   .homepage {
     width: 100%;
     height: 90%;
-  }
-
-  .YouWonLostImg {
-    width: 100%;
   }
 
   .darkMoneyImg {
@@ -113,10 +108,15 @@
      width: 85%;
  }
 
- .youWonLostImg {
+ .youLostImg {
      height: 100%;
-     margin: 5% 5% 5% 5%;
+     margin: 7% 4% 7% 4%;
  }
+
+ .youWonImg {
+    height: 100%;
+    margin: 10% 0% 10% 0%;
+}
 
   li {
     margin: auto auto auto auto;
