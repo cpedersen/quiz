@@ -1,8 +1,8 @@
 * {
     box-sizing: border-box;
-  }
+}
   
-  html {
+html {
     /* 100% = 16 pixels */
     /*font-size: 100%;*/
     font-size: 20px;
@@ -10,32 +10,32 @@
     /*font-size: 18px;*/
     margin: 2% 2% 2% 2%;
     font-family: 'Lucida Sans';
-  }
+}
 
-  /* HEADER */
-  .header {
+/* HEADERS */
+.header {
     line-height: 1;
     margin: auto;
-  }
+}
 
-  header h1 {
+header h1 {
     font-size: 1.5em;
-  }
+}
 
-  header h2 {
+header h2 {
     font-size: 1.1em;
-  }
+}
 
-  header h1, header h2 {
+header h1, header h2 {
     display: block;
     margin: 0.83em 0 0 0;
     font-weight: bold;
     text-align: center;
     line-height: 1;
-  }
+}
 
-  /* CONTAINERS */
-  .outer-container {
+/* CONTAINERS */
+.outer-container {
     margin: 1em auto auto auto;
     height: 650px;
     width: 500px;
@@ -48,115 +48,129 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-  }
+}
 
-  .inner-container {
+.inner-container {
     margin: auto auto 30px auto;
     text-align: left;
     height: 500px;
     width: 375px;
     background: white;
-    padding: auto;
     border: 1px black solid;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
 
-  .black-box {
+.black-box {
     background: black;
-  }
+}
 
-  .WomanLightImg {
+.WomanLightImg {
       margin: 5%;
       width: 80%;
-  }
+}
 
-  .uh-oh-box {
+.uh-oh-box {
     display: block;
     margin: auto;
     width: 100%;
     padding: 0px;
     justify-content: center;
- }
+}
 
-  .you-won-lost-box {
+.you-won-lost-box {
     width: 100%;
     justify-content: center;
-  }
+}
 
-  /* TEXT & IMG SETTINGS */
-  .homepage {
+/* TEXT & IMG SETTINGS */
+.homepage {
     width: 100%;
     height: 90%;
-  }
+}
 
-  .darkMoneyImg {
+.darkMoneyImg {
     width: 90%;
     height: auto;
     margin: 30px auto auto auto;
-  }
+}
   
-  .eleanorQuoteImg {
+.eleanorQuoteImg {
     width: 100%;
     height: auto;
     margin: auto;
-  }
+}
   
- .UhOhImg {
-     margin: 5%;
-     width: 85%;
- }
+.UhOhImg {
+    margin: 5%;
+    width: 85%;
+}
 
- .youLostImg {
+.youLostImg {
      height: 100%;
      margin: 7% 4% 7% 4%;
- }
+}
 
- .youWonImg {
+.youWonImg {
     height: 100%;
     margin: 10% 0% 10% 0%;
 }
 
-  li {
-    margin: auto auto auto auto;
-  }
+li {
+    margin: auto;
+}
   
-  .select-answers {
+.select-answer {
     margin: 10% auto 5% 5%;
-  }
+}
 
-  .possible-answers {
+.possible-answers {
     margin: 0 0 0 5%;
     list-style-type: circle;
-   }
+}
 
-   .correct-answer {
+.correct-answer {
     margin: 0 0 0 2%;
     padding: 0; 
-   }
+}
 
-   .ask-question {
+.ask-question {
     display: inline-block;
-   }
+    background: white;
+}
 
 /* SCORING */
 .scorecard {
     list-style-type: none;
     display: block;
     text-align: center;
-    margin: 2% 0% 0% 0;
+    margin: auto;
+    padding: 2%;
 }
     
-.question, .score, .numQuestion, .numScore {
+.scorecard p {
+    display: inline;
+}
+
+.scorecard p #score {
+
+}
+
+.scorecard p#question {
+    padding-right: 20px;
+}
+
+
+numQuestion, .numScore {
     font-size: 110%;
     font-weight: bold;
     line-height: 1;
     margin: 0 0 1% 0;
 }
   
-  /* BUTTONS */
-  .button {
+/* BUTTONS */
+.button {
     cursor: pointer;
 	display: inline-block;
     margin: 4%;
@@ -173,52 +187,59 @@
 	font-weight:bold;
     padding: 3% 3% 2% 2%;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
-  }
+    text-shadow:0px 1px 0px #ffffff;
+    margin: 4% 0 0 0;
+}
 
-  .start {
-    margin: 0 0 0 0;
-  }
-
-  .button:hover {
+.button:hover {
 	background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
 	background-color:#dfdfdf;
-   }
+}
 
-   .button:active {
+.button:active {
     position: relative;
     top: 1px;
 	color: royalblue;
-   }
+}
 
+#start {
+}
 
-  /* Small phone screens */
-  @media only screen and (max-width: 600px) 
+#submit {
+}
+
+#next {
+}
+
+#restart {
+}
+
+/* Small phone screens */
+@media only screen and (max-width: 600px) 
   {
 
   
-  }
+}
   
-  /* Large phone screens and portrait tablets */
-  @media only screen and (min-width:600px) 
+/* Large phone screens and portrait tablets */
+@media only screen and (min-width:600px) 
   {
 
   
-  }
+}
   
   /* Landscape tablets */
-  @media only screen and (min-width:768px) 
+@media only screen and (min-width:768px) 
   {
 
   
-  }
+}
   
   /* Laptops/desktops */
-  @media only screen and (min-width:992px) 
+@media only screen and (min-width:992px) 
   {
-
   
-  }
+}
 
 
 
