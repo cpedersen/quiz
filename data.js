@@ -20,7 +20,7 @@ const DATA = {
 };
 
 
-const BACKUP = {
+const TEST = {
     //store the quiz score, the question we're on, and the questions/options
     score: 0,
     questionIndex: 0,

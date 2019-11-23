@@ -65,14 +65,20 @@ function renderScorecard(option) {
             resetScore();
             resetQuestion();
         } 
-        //create content in html format, then insert into the dom
-        console.log("renderScorecard: question number = " + DATA.questionNum);
-        console.log("renderScorecard: score = " + DATA.score);
-        const htmlToInsert = $(`
-            <p id="question">Question: ${DATA.questionNum}/${DATA.questions.length}</p> 
-            <p id="score">Score: ${DATA.score}/${DATA.questions.length}</p>`);
-        $('.scorecard').show();
-        $('.scorecard').html(htmlToInsert);
+        //YOUAREHERE
+        if (DATA.questionNum <= DATA.questions.length) {
+            console.log("handleQuestion: Only update scorecard html if questionNum <= num Questions");
+            //create content in html format, then insert into the dom
+            console.log("renderScorecard: question number = " + DATA.questionNum);
+            console.log("renderScorecard: score = " + DATA.score);
+            const htmlToInsert = $(`
+                <p id="question">Question: ${DATA.questionNum}/${DATA.questions.length}</p> 
+                <p id="score">Score: ${DATA.score}/${DATA.questions.length}</p>`);
+            $('.scorecard').show();
+            $('.scorecard').html(htmlToInsert);
+        } else {
+            $('.scorecard').show();
+        }
     }
 }
 
@@ -81,6 +87,7 @@ function renderQuestion() {
     //get options to display
     const questionAndOptions = DATA.questions[DATA.questionIndex];
     const questionText = questionAndOptions.question;
+    console.log("renderQuestion: questionText = " + questionText);
     $('h2').html(questionText);
 }
 
@@ -98,10 +105,8 @@ function renderQuestionAndOptions(option) {
 function renderNewQuestionAndOptions() {
     console.log("renderNewQuestionAndOptions: Rendering new question/options");
     //get options to display
-    console.log("renderNewQuestionAndOptions: question index = " + DATA.questionIndex);
     const questionAndOptions = DATA.questions[DATA.questionIndex];
     const questionText = questionAndOptions.question;
-    console.log("renderNewQuestionAndOptions: questionText = " + questionText);
     const optionsArr = questionAndOptions.options;
     console.log("renderNewQuestionAndOptions: optionsArr = " + optionsArr);
 
@@ -132,7 +137,6 @@ function renderNewQuestionAndOptions() {
     `);
 
     //insert html into the dom
-    //$('h2').html(questionText);
     renderQuestion();
     $('main').html(formHtml);
 }
@@ -261,7 +265,6 @@ function renderWonResult() {
 
 function renderStartPage() {
     console.log("renderStartPage: Rendering start page");
-
     //generate the html to display
     const headerHtml = "Can you save our Democracy?";
     const imgHtml = $(`
@@ -282,9 +285,11 @@ function renderStartPage() {
 //********************************************************* */
 function handleQuestion() {
     console.log("handleQuestion: Handling the question");
-    if (DATA.questionIndex < DATA.questions.length) {
-        console.log("handleQuestion: only increment question if questionIndex < num Questions");
+    if (DATA.questionNum <= DATA.questions.length) {
+        console.log("handleQuestion: Only increment question if questionNum <= num Questions");
         incrQuestion();
+    } else {
+        console.log("handleQuestion: Don't increment question");
     }
 }
 
