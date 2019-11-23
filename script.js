@@ -25,6 +25,8 @@ function listenSubmitButton() {
         const answer = $("input[type='radio']:checked").val();
         renderAnswer(answer);
         renderScorecard();
+        //increment the question 
+        handleQuestion();
     });
 }
 
@@ -33,8 +35,6 @@ function listenNextButton() {
     $('body').on('click', '#next', function (event) {
         console.log("listenNextButton: Next button selected");   
         renderQuestionAndOptions();
-        //YOUAREHERE
-        incrQuestion();
         renderScorecard();   
     });
 }
@@ -43,6 +43,8 @@ function listenRestartButton() {
     console.log("listenRestartButton: Listening for Restart button click");
     $('body').on('click', '#restart', function (event) {
         console.log("listenRestartButton: Restart button selected");
+        resetScore();
+        resetQuestion();
         renderStartPage();
         renderScorecard('hide');
         listenStartButton();
@@ -75,9 +77,8 @@ function renderScorecard(option) {
 }
 
 function renderQuestion() {
-    console.log("renderQuestion: Rendering the question");
+    console.log("renderQuestion: Rendering the question text");
     //get options to display
-    console.log("renderNewQuestionAndOptions: question index = " + DATA.questionIndex);
     const questionAndOptions = DATA.questions[DATA.questionIndex];
     const questionText = questionAndOptions.question;
     $('h2').html(questionText);
@@ -131,13 +132,9 @@ function renderNewQuestionAndOptions() {
     `);
 
     //insert html into the dom
-    $('h2').empty();
-    $('h2').html(questionText);
+    //$('h2').html(questionText);
+    renderQuestion();
     $('main').html(formHtml);
-
-    //TODO - move incr out of a render function
-    //incrQuestion();
-    //renderQuestion();
 }
 
 function renderButton(option) {
@@ -283,6 +280,14 @@ function renderStartPage() {
 //********************************************************* */
 //                HANDLE FUNCTIONS
 //********************************************************* */
+function handleQuestion() {
+    console.log("handleQuestion: Handling the question");
+    if (DATA.questionIndex < DATA.questions.length) {
+        console.log("handleQuestion: only increment question if questionIndex < num Questions");
+        incrQuestion();
+    }
+}
+
 function handleAnswer(answer) {
     console.log("handleAnswer: Handling the selected answer");
     //report whether the answer is right or wrong
@@ -303,9 +308,6 @@ function handleAnswer(answer) {
             return 1;
         }
     }
-    //YOUAREHERE
-    incrQuestion();
-    renderScorecard();
 }
 
 //********************************************************* */
@@ -318,37 +320,21 @@ function incrScore() {
     //increment score
     DATA['score'] = DATA.score + 1;
     console.log("incrScore: Incrementing score to " + DATA.score);
-
-    //insert score into the dom
-    //TODO - should not be updating the dom here, should be using renderScorecard
-    //$('.score').text(score);
 }
 
 //increment question index & number displayed to user
 function incrQuestion() {
-    console.log("incrQuestion: number of questions is " + DATA.questions.length);
-    console.log("incrQuestion: question index is " + DATA.questionIndex);
-    console.log("incrQuestion: question num is " + DATA.questionNum);
-    //prevent incrementing after all questions have been answers
-    //if (DATA.questionNum >= DATA.questions.length) {
-        console.log("incrQuestion: Reached max; cannot increment");
-    //} else {
-        console.log("incrQuestion: Incrementing questionIndex and questionNum")
-        DATA['questionIndex'] = DATA.questionIndex + 1;
-        DATA['questionNum'] = DATA.questionNum + 1;
-        console.log("incrQuestion: Updating question index to " + DATA.questionIndex);
-        console.log("incrQuestion: Updating question number to " + DATA.questionNum);
-    //}
-    //$('#question').
-    //<p id="question">Question: ${DATA.questionNum}/${DATA.questions.length}</p> 
+    console.log("incrQuestion: Incrementing questionIndex and questionNum")
+    DATA['questionIndex'] = DATA.questionIndex + 1;
+    DATA['questionNum'] = DATA.questionNum + 1;
+    console.log("incrQuestion: Updating question index to " + DATA.questionIndex);
+    console.log("incrQuestion: Updating question number to " + DATA.questionNum);
 }
 
 //reset the score and question
 function resetScore() {
     console.log("resetScore: Resetting score");
     DATA['score'] = 0;
-    //DATA['questionIndex'] = 0;
-    //DATA['questionNum'] = 1;
 }
 
 function resetQuestion() {
