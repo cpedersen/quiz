@@ -1,121 +1,121 @@
 //********************************************************* */
 //                LISTENER FUNCTIONS
 //********************************************************* */
-// The following functions listen for events.
+// The following functions listen for click button events.
 function listenStartButton() {
-    console.log("Listening for Start button click");
-    //listen for start event
+    console.log("listenStartButton: Listening for Start button click");
     $('body').on('click', '.start', function (event) {
-        console.log("Hiding and toggling elements after selecting Start button")
-        //hide start page elements
+        console.log("listenStartButton: Start button selected")
         $('.darkMoneyImg').hide();
         $('.eleanorQuoteImg').hide();
         $('#dark-money').removeClass('black-box');
         $('#dark-money').removeClass('ask-question');
-        //display quiz
         renderQuestionAndOptions();
-        renderScorecard();
+        renderScorecard('reset');
     });
-}
-
-//no longer using
-function listenRadioButton() {
-    console.log("Listening for Radio button click");
-    $('body').on('click', '#option', function (event) {
-        //TODO - would like to use the index for the answer, not the text
-        const answerText = $("input[type='radio']:checked").val();
-        //const answers = $("#quiz-form input:radio[name='option']");
-        //console.log(JSON.stringify(answers));
-        //console.log("answers = " + answers);
-        //const answer = answers.index(answers) 
-        console.log("answerText = " + answerText);
-        //renderScorecard();
-        //console.log("answer = " + answerText);
-        return answerText;
-    });
-    //if (!answer) {
-    //    alert("Please choose an option");
-    //return;
-    //}
 }
 
 function listenSubmitButton() {
-    console.log("Listening for Submit button click");
-    $('body').on('click', '#submit', function (event) {
+    console.log("listenSubmitButton: Listening for Submit button click");
+    $('body').on('submit', '#quiz-form', function (event) {
+        console.log("listenSubmitButton: Submit button selected");
         //don't submit to a server
         event.preventDefault();
-        //listen for user selection of an answer
+        //get user's answer
         const answer = $("input[type='radio']:checked").val();
-        console.log("answer = " + answer);
         renderAnswer(answer);
         renderScorecard();
     });
 }
 
 function listenNextButton() {
-    console.log("Listening for Next button click");
-    $('body').on('click', '.next', function (event) {
-        renderButton('next');
-        renderScorecard();
+    console.log("listenNextButton: Listening for Next button click");
+    $('body').on('click', '#next', function (event) {
+        console.log("listenNextButton: Next button selected");   
         renderQuestionAndOptions();
+        //YOUAREHERE
+        incrQuestion();
+        renderScorecard();   
     });
 }
 
 function listenRestartButton() {
-    console.log("Listening for Restart button click");
-    $('body').on('click', '.restart', function (event) {
-        resetQuiz();
-        //bring back start page elements
-        $('.darkMoneyImg').show();
-        $('.eleanorQuoteImg').show();
-        $('#dark-money').addClass('black-box');
-        $('#dark-money').addClass('ask-question');
-        renderButton('start');
+    console.log("listenRestartButton: Listening for Restart button click");
+    $('body').on('click', '#restart', function (event) {
+        console.log("listenRestartButton: Restart button selected");
+        renderStartPage();
+        renderScorecard('hide');
+        listenStartButton();
     });
 }
 
 //********************************************************* */
 //                RENDER FUNCTIONS
 //********************************************************* */
-function renderScorecard() {
-    console.log("Rendering scorecard");
-
-    //create content in html format, then insert into the dom
-    console.log("question index = " + DATA.questionIndex);
-    console.log("score = " + DATA.score);
-    const htmlToInsert = $(`
-    <p id="question">Question: ${DATA.questionIndex}/${DATA.questions.length}</p> 
-    <p id="score">Score: ${DATA.score}/${DATA.questions.length}</p>`);
-    $('.scorecard').html(htmlToInsert);
+function renderScorecard(option) {
+    if (option === 'hide') {
+        console.log("renderScorecard: Hiding scorecard");
+        $('.scorecard').hide();
+    } else {
+        console.log("renderScorecard: Rendering scorecard");
+        if (option === 'reset') {
+            console.log("renderScorecard: Resetting score and question");
+            resetScore();
+            resetQuestion();
+        } 
+        //create content in html format, then insert into the dom
+        console.log("renderScorecard: question number = " + DATA.questionNum);
+        console.log("renderScorecard: score = " + DATA.score);
+        const htmlToInsert = $(`
+            <p id="question">Question: ${DATA.questionNum}/${DATA.questions.length}</p> 
+            <p id="score">Score: ${DATA.score}/${DATA.questions.length}</p>`);
+        $('.scorecard').show();
+        $('.scorecard').html(htmlToInsert);
+    }
 }
 
-function renderQuestionAndOptions() {
+function renderQuestion() {
+    console.log("renderQuestion: Rendering the question");
+    //get options to display
+    console.log("renderNewQuestionAndOptions: question index = " + DATA.questionIndex);
+    const questionAndOptions = DATA.questions[DATA.questionIndex];
+    const questionText = questionAndOptions.question;
+    $('h2').html(questionText);
+}
+
+function renderQuestionAndOptions(option) {
+    console.log("renderQuestionAndOptions: Making decision about whether to render quiz or final result");
     if (DATA.questionIndex < DATA.questions.length) {
         //user needs a new question/options 
         renderNewQuestionAndOptions();
     } else {
         //user needs the final result displayed
-        renderButton('restart');
         renderFinalResult();
     }
 }
 
 function renderNewQuestionAndOptions() {
-    console.log("Rendering new question/options, along with Submit button");
-
-    //gather info
-    console.log("question index = " + DATA.questionIndex);
+    console.log("renderNewQuestionAndOptions: Rendering new question/options");
+    //get options to display
+    console.log("renderNewQuestionAndOptions: question index = " + DATA.questionIndex);
     const questionAndOptions = DATA.questions[DATA.questionIndex];
     const questionText = questionAndOptions.question;
-    console.log("questionText = " + questionText);
+    console.log("renderNewQuestionAndOptions: questionText = " + questionText);
     const optionsArr = questionAndOptions.options;
-    console.log("optionsArr = " + optionsArr);
+    console.log("renderNewQuestionAndOptions: optionsArr = " + optionsArr);
+
+    //TODO - how add question to the form below so that it shows up as an h2 at top of screen?
+    const questionHtml = $(`
+    <fieldset>
+        <legend class="question-text">${questionText}>/legend>
+    </fieldset>`);
 
     //create question/options quiz form
-    //DEBUG3 - required isn't working
     const formHtml = $(`
-        <form id="quiz-form" class="quiz-form">
-            <ul style="list-style-type:none;">
+    <form id="quiz-form" class="quiz-form">
+        <section id="dark-money" class="inner-container start-quiz homepage uh-oh-box you-won-lost-box">
+            <p id="select-answer" class="select-answer">Select the correct answer:</p>
+            <ul id="list-options" style="list-style-type:none;">
                 <li><input type="radio" name="options" id="option" value="${optionsArr[0]}"
                 required>${optionsArr[0]}</li>
                 <li><input type="radio" name="options" id="option" value="${optionsArr[1]}"
@@ -125,102 +125,107 @@ function renderNewQuestionAndOptions() {
                 <li><input type="radio" name="options" id="option" value="${optionsArr[3]}"
                 required>${optionsArr[3]}</li>
             </ul>
-            <button id="submit" type="submit" class="button">Submit</button>
-        </form>
+        </section>
+        <button id="submit" type="submit" class="button">Submit</button>
+    </form>
     `);
 
-    //$('.button').html("Submit");
-    //$('.button').addClass("submit");
-    //return buttonHtml;
-    //$('#dark-money').append(buttonHtml);
-    //DEBUG1 - Various Submit button problems
-    //display the submit button
-    //buttonHtml = renderButton('submit');
-    //$(buttonHtml).appendTo(formHtml);
-    
     //insert html into the dom
+    $('h2').empty();
     $('h2').html(questionText);
-    $('#select-answer').html("Select the correct answer:");
-    $('#possible-answers').html(formHtml);
+    $('main').html(formHtml);
 
-    //increment questionIndex
-    DATA['questionIndex'] = DATA.questionIndex + 1; 
+    //TODO - move incr out of a render function
+    //incrQuestion();
+    //renderQuestion();
 }
 
 function renderButton(option) {
-    //DEBUG2 - render button issues
-    console.log("Rendering button: " + option);
-    if (option === "submit") {
-        //$('#start').hide('.start');
-        const buttonHtml = $(`
-        <button id="submit" type="submit" class="button">Submit</button>
-    `);
-        //$('.button').html("Submit");
-        //$('.button').addClass("submit");
-        //return buttonHtml;
-        $('#dark-money').append(buttonHtml);
+    console.log("renderButton: Rendering button: " + option);
+    let buttonHtml = "";
+    if (option === "start") {
+        buttonHtml = $(`
+            <button id="start" type="button" class="button start">Start</button>
+        `);
+        $('#restart').hide();
     } else if (option === "next") {
-        const buttonHtml = $(`
+        buttonHtml = $(`
             <button id="next" type="button" class="button">Next</button>
         `);
-        //$('#start').show('.start');
-        //$('.button').html("Next");
-        //$('.button').addClass("next");
-        $('#button').hide();
-        $('#dark-money').append(buttonHtml);
+        $('#submit').hide();
     } else if (option === "start") {
-        const buttonHtml = $(`
+        buttonHtml = $(`
             <button id="start" type="button" class="button">Start</button>
         `);
-        //$('#start').show('.start');
-        //$('.button').html("Start");
-        //$('.button').addClass("start");
-        $('#button').hide();
-        $('#dark-money').append(buttonHtml);
     } else if (option === "restart") {
-        const buttonHtml = $(`
+        buttonHtml = $(`
             <button id="restart" type="button" class="button">Restart</button>
         `);
-        //$('#start').show('.start');
-        //$('.button').html("Restart");
-        //$('.button').addClass("restart");
-        $('#button').hide();
-        $('#dark-money').append(buttonHtml);
+        $('#next').hide();
     }
-    //$('#button').empty();
-    //$('.button').html(buttonHtml);
-    
+    $('#dark-money').append(buttonHtml);
 }
 
-function renderAnswer() {
-    console.log("renderAnswer");
+function renderAnswer(answer) {
+    console.log("renderAnswer: Rendering the answer");
+    
+    //call handleAnswer to get pass or fail result
+    const result = handleAnswer(answer);
 
-    //call handleAnswer to get pass or fail
+    //hide the quiz options
+    $('#select-answer').remove();
+    $('#list-options').remove();
 
-    //call either renderCorrectAnswer or renderWrongAnswer
+    //render the correct response to the result
+    if (result === 0) {
+        renderRightAnswer();
+    } else {
+        renderWrongAnswer();
+    }
     renderButton('next');
 }
 
-function renderCorrectAnswer(indexAnswer) {
-    console.log("renderCorrectAnswer");
+function renderRightAnswer() {
+    console.log("renderRightAnswer: Rendering correct answer");
 
     //generate the html to display
+    const headerHtml = "Great job! You are lighting the way for Democracy.";
+    const answerHtml = $(`<img src="images/AnswerYes.png" alt="Woman shines light" class="WomanLightImg">`);
 
     //insert html into the dom
-
+    $('h2').html(headerHtml);
+    $('#dark-money').append(answerHtml);
 }
 
-function renderWrongAnswer(indexAnswer) {
-    console.log("renderWrongAnswer");
+function renderWrongAnswer() {
+    console.log("renderWrongAnswer: Rendering wrong answer");
+
+    //get the correct answer
+    const questionAndOptions = DATA.questions[DATA.questionIndex];
+    const optionsArr = questionAndOptions.options;
+    const curCorrectAnswer = questionAndOptions.correctAnswer;
+    console.log("renderWrongAnswer: correct answer = " + curCorrectAnswer);
+
     //generate the html to display
+    const headerHtml = "A Democracy needs an educated electorate!";
+    const answerHtml = $(`<img src="images/AnswerNo.png" alt="Ben Franklin Oh No" class="UhOhImg">
+    <p class="correct-answer">The correct answer is:</p>
+    <ul>
+      <li>“${curCorrectAnswer}"</li>
+    </ul>
+    `);
 
     //insert html into the dom
+    $('h2').html(headerHtml);
+    $('#dark-money').append(answerHtml);
 }
 
 function renderFinalResult() {
-    console.log("Rendering final result, along with Restart button");
+    console.log("renderFinalResult: Rendering final result");
+    //get the final results
+    console.log("renderFinalResult: questionIndex is " + DATA.questionIndex);
 
-    if (result === true) {
+    if (DATA.score === DATA.questions.length) {
         renderWonResult();
     } else {
         renderLostResult();
@@ -229,77 +234,128 @@ function renderFinalResult() {
 }
 
 function renderLostResult() {
-console.log("renderLostResult");
+    console.log("renderLostResult: Rendering unsuccessful final result");
     //generate the html to display
+    const headerHtml = "You lost! Dark Money is consuming our Democracy!";
+    const imgHtml = $(`
+        <img src="images/YouLost.png" alt="Black hole of money" class="youLostImg">
+    `);
 
     //insert html into the dom
-
+    $('h2').html(headerHtml);
+    $('#dark-money').empty();
+    $('#dark-money').addClass('.black-box');
+    $('#dark-money').append(imgHtml);
 }
 
 function renderWonResult() {
-    console.log("renderWrongResult");
+    console.log("renderWonResult: Rendering successful final result");
     //generate the html to display
+    const headerHtml = "You won! Our elections can't be bought!";
+    const imgHtml = $(`
+        <img src="images/YouWon.png" alt="Statue of Liberty" class="youWonImg">
+    `);
 
     //insert html into the dom
+    $('h2').html(headerHtml);
+    $('#dark-money').empty();
+    $('#dark-money').append(imgHtml);
 }
 
+function renderStartPage() {
+    console.log("renderStartPage: Rendering start page");
+
+    //generate the html to display
+    const headerHtml = "Can you save our Democracy?";
+    const imgHtml = $(`
+        <img src="images/DarkMoney.png" alt="Dark Money spooky image" class="darkMoneyImg">
+        <img src="images/EleanorRooseveltQuote.png" alt="Quote about education" class="eleanorQuoteImg">
+    `);
+
+    //insert html into the dom
+    $('h2').html(headerHtml);
+    $('#dark-money').empty();
+    $('#dark-money').append(imgHtml);
+    $('#dark-money').addClass('black-box');
+    renderButton('start');
+}
 
 //********************************************************* */
 //                HANDLE FUNCTIONS
 //********************************************************* */
 function handleAnswer(answer) {
-    console.log("Handling the selected answer");
-    console.log("number of questions = " + DATA.questions.length);
-
-    //compare answer to expected answer
-    //result = 0 or 1
-
-    //update DATA object with result
-
+    console.log("handleAnswer: Handling the selected answer");
+    //report whether the answer is right or wrong
     if (DATA.questionIndex < DATA.questions.length) {
-        console.log("question index = " + DATA.questionIndex);
+        //get expected answer from DATA object
         const questionAndOptions = DATA.questions[DATA.questionIndex];
-        const questionText = questionAndOptions.question;
-        console.log("questionText = " + questionText);
         const optionsArr = questionAndOptions.options;
-        console.log("optionsArr = " + optionsArr);
+        const curCorrectAnswer = questionAndOptions.correctAnswer;
+        console.log("handleAnswer: correct answer = " + curCorrectAnswer);
+        console.log("handleAnswer: answer = " + answer);
+        //compare answer to correct answer, then return 0/1 (pass/fail)
+        if (answer.localeCompare(curCorrectAnswer) == 0) {
+            incrScore();
+            console.log("handleAnswer: PASS: Answer is correct");
+            return 0;
+        } else {
+            console.log("handleAnswer: FAIL: Answer is wrong");
+            return 1;
+        }
     }
-
-    //console.log("User selection: " + option);
-
-    //Get the current question and answer
-    let currentQuestion = DATA.questions[DATA.questionIndex];
-
-
-
-    //return pass or fail
+    //YOUAREHERE
+    incrQuestion();
+    renderScorecard();
 }
-
 
 //********************************************************* */
 //                UTILITY FUNCTIONS
 //********************************************************* */
 // The following functions are used by the above functions.
-function updateScorecard(score) {
+
+//increment score 
+function incrScore() {
     //increment score
-    score++;
+    DATA['score'] = DATA.score + 1;
+    console.log("incrScore: Incrementing score to " + DATA.score);
 
-    //display score
-    $('.score').text(score);
+    //insert score into the dom
+    //TODO - should not be updating the dom here, should be using renderScorecard
+    //$('.score').text(score);
 }
 
-//keep track of which question we're on
-function updateQuestion() {
-
+//increment question index & number displayed to user
+function incrQuestion() {
+    console.log("incrQuestion: number of questions is " + DATA.questions.length);
+    console.log("incrQuestion: question index is " + DATA.questionIndex);
+    console.log("incrQuestion: question num is " + DATA.questionNum);
+    //prevent incrementing after all questions have been answers
+    //if (DATA.questionNum >= DATA.questions.length) {
+        console.log("incrQuestion: Reached max; cannot increment");
+    //} else {
+        console.log("incrQuestion: Incrementing questionIndex and questionNum")
+        DATA['questionIndex'] = DATA.questionIndex + 1;
+        DATA['questionNum'] = DATA.questionNum + 1;
+        console.log("incrQuestion: Updating question index to " + DATA.questionIndex);
+        console.log("incrQuestion: Updating question number to " + DATA.questionNum);
+    //}
+    //$('#question').
+    //<p id="question">Question: ${DATA.questionNum}/${DATA.questions.length}</p> 
 }
 
-//reset the score and question number we're on
-function resetQuiz() {
+//reset the score and question
+function resetScore() {
+    console.log("resetScore: Resetting score");
     DATA['score'] = 0;
-    DATA['questionIndex'] = 0;
+    //DATA['questionIndex'] = 0;
+    //DATA['questionNum'] = 1;
 }
 
-
+function resetQuestion() {
+    console.log("resetQuestion: Resetting question numbering");
+    DATA['questionIndex'] = 0;
+    DATA['questionNum'] = 1;  
+}
 
 //********************************************************* */
 //               RUN QUIZ 
@@ -308,8 +364,8 @@ function runQuiz() {
     //listen for major events
     listenStartButton();
     listenSubmitButton();
-    /*istenNextButton();*/
-    /*listenRestartButton();*/
+    listenNextButton();
+    listenRestartButton();
 }
 
 $(runQuiz);
