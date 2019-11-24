@@ -165,7 +165,7 @@ function renderButton(option) {
         `);
         $('#next').hide();
     }
-    $('#button-section').append(buttonHtml);
+    $('#dark-money').append(buttonHtml);
 }
 
 function renderAnswer(answer) {
