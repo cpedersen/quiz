@@ -6,13 +6,13 @@ const DATA = {
     questions: [
         {
             question: "Question 1",
-            options: ["Answer A", "Answer B", "Answer C", "Answer D"],
+            options: ["Answer A - Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do!", "Answer B", "Answer C", "Answer D"],
             correctAnswer: ["Answer C"]
         },
 
         {
             question: "Question 2",
-            options: ["Question 2: Answer A", "Question 2: Answer B", "Question 2: Answer C", "Question 2: Answer D"],
+            options: ["Question 2: Answer A Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do!", "Question 2: Answer B", "Question 2: Answer C", "Question 2: Answer D"],
             correctAnswer: ["Question 2: Answer A"]
         },
 

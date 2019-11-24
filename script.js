@@ -4,7 +4,7 @@
 // The following functions listen for click button events.
 function listenStartButton() {
     console.log("listenStartButton: Listening for Start button click");
-    $('body').on('click', '.start', function (event) {
+    $('body').on('click', '#start', function (event) {
         console.log("listenStartButton: Start button selected")
         $('.darkMoneyImg').hide();
         $('.eleanorQuoteImg').hide();
@@ -65,7 +65,6 @@ function renderScorecard(option) {
             resetScore();
             resetQuestion();
         } 
-        //YOUAREHERE
         if (DATA.questionNum <= DATA.questions.length) {
             console.log("handleQuestion: Only update scorecard html if questionNum <= num Questions");
             //create content in html format, then insert into the dom
@@ -119,7 +118,7 @@ function renderNewQuestionAndOptions() {
     //create question/options quiz form
     const formHtml = $(`
     <form id="quiz-form" class="quiz-form">
-        <section id="dark-money" class="inner-container start-quiz homepage uh-oh-box you-won-lost-box">
+        <section id="dark-money" class="inner-container">
             <p id="select-answer" class="select-answer">Select the correct answer:</p>
             <ul id="list-options" style="list-style-type:none;">
                 <li><input type="radio" name="options" id="option" value="${optionsArr[0]}"
@@ -146,7 +145,7 @@ function renderButton(option) {
     let buttonHtml = "";
     if (option === "start") {
         buttonHtml = $(`
-            <button id="start" type="button" class="button start">Start</button>
+            <button id="start" type="button" class="button">Start</button>
         `);
         $('#restart').hide();
     } else if (option === "next") {
@@ -154,6 +153,8 @@ function renderButton(option) {
             <button id="next" type="button" class="button">Next</button>
         `);
         $('#submit').hide();
+        //TODO - fix this
+        //$('#dark-money').append(buttonHtml);
     } else if (option === "start") {
         buttonHtml = $(`
             <button id="start" type="button" class="button">Start</button>
@@ -164,7 +165,7 @@ function renderButton(option) {
         `);
         $('#next').hide();
     }
-    $('#dark-money').append(buttonHtml);
+    $('#button-section').append(buttonHtml);
 }
 
 function renderAnswer(answer) {
@@ -217,6 +218,7 @@ function renderWrongAnswer() {
     `);
 
     //insert html into the dom
+    $('#dark-money').addClass('uh-oh-box');
     $('h2').html(headerHtml);
     $('#dark-money').append(answerHtml);
 }
@@ -245,7 +247,7 @@ function renderLostResult() {
     //insert html into the dom
     $('h2').html(headerHtml);
     $('#dark-money').empty();
-    $('#dark-money').addClass('.black-box');
+    $('#dark-money').addClass('black-box');
     $('#dark-money').append(imgHtml);
 }
 
