@@ -1,26 +1,16 @@
+/* GENERAL SETTINGS */
 * {
     box-sizing: border-box;
-    align-items: center;
 }
   
-/**, *:before, *:after {
-    box-sizing: inherit;
-}*/
-
 html {
-    /* 100% = 16 pixels */
-    /*font-size: 100%;*/
-    font-size: 20px;
-    /*font-size: 1.25em;*/
-    /*font-size: 18px;*/
-    /*margin: 2% 2% 2% 2%;*/
+    font-size: 1.25em;
     font-family: 'Lucida Sans';
 }
 
 /* HEADERS */
 .header {
     line-height: 1;
-    /*margin: auto;*/
 }
 
 header h1 {
@@ -30,26 +20,26 @@ header h1 {
     font-weight: bold;
     text-align: center;
     line-height: 1;
+    white-space: nowrap;
 }
 
 h2 {
-    font-size: 1.1em;
-    display: block;
+    font-size: 1.25em;
     margin: 0.83em 0 0 0;
     font-weight: bold;
     text-align: center;
     line-height: 1;
+    white-space: nowrap;
 }
 
-/* SCREEN BOXES */
+/* SCREEN CONTAINERS */
 #quiz-form {
     display: flex;
-    /*flex-grow: 1;*/
+    flex-grow: 1;
     flex-direction: column;
     align-items: center;
     align-content: space-around;
     justify-content: space-around;
-    /*background-color: purple;*/
 }
 
 .start-quiz {
@@ -67,85 +57,73 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: stretch;
-
-    /*flex-grow: 1;*/
-    /*flex-direction: column;*/
-    /*align-items: stretch;*/
-    /*align-content: space-around;*/
+    flex-grow: 1;
     justify-content: space-around;
-    /*background-color: purple;*/
 }
 
 .inner-container {
     margin: auto;
     text-align: left;
     height: 500px;
-    /*width: 375px;*/
     width: 95%;
-    /*height: 90%;*/
     background: white;
     border: 1px black solid;
-
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-}
-
-.inner-container-backup {
-    margin: auto auto 30px auto;
-    text-align: left;
-    height: 500px;
-    width: 375px;
-    background: white;
-    border: 1px black solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.outer-container-backup {
-    margin: 1em auto auto auto;
-    height: 650px;
-    width: 500px;
-    /*width: 40%;*/
-    background-image: url('images/Background.png');
-    background-position: center;
-    padding: 4%;
-    border: 1px black solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .black-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: black;
-}
-
-.WomanLightImg {
-    margin: 5%;
-    width: 80%;
 }
 
 .uh-oh-box {
     display: block;
     margin: auto;
-    /*width: 100%;*/
     padding: 0px;
-    /*justify-content: center;*/
 }
 
-/*.you-won-lost-box {
-    width: 100%;
-    justify-content: center;
-}*/
+.great-job {
+    width: 110%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
 
-/* TEXT & IMG SETTINGS */
-/*.homepage {
-    width: 100%;
-    height: 90%;
-}*/
+.you-lost-box {
+    width: 350px;
+    height: 450px;
+    justify-content: center;
+}
+
+.you-won-box {
+    display: flex;
+    width: 140%;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+}
+
+/* IMG SETTINGS */
+.youWonImg {
+    margin: 7% 4% 7% 4%;
+    width: 90%;
+ }
+
+.youLostImg {
+    margin: 7% 4% 7% 4%;
+}
+
+.WomanLightImg {
+    margin: 10% 5%;
+}
+
+.UhOhImg {
+    margin: 5% 0% 5% 9.5%;
+    width: 80%;
+}
 
 .darkMoneyImg {
     width: 90%;
@@ -158,23 +136,8 @@ h2 {
     height: auto;
     margin: auto;
 }
-  
-.UhOhImg {
-    /*margin: 5%;*/
-    margin: 5% 0% 5% 9.5%;
-    width: 80%;
-}
 
-.youLostImg {
-     height: 100%;
-     margin: 7% 4% 7% 4%;
-}
-
-.youWonImg {
-    height: 100%;
-    margin: 10% 0% 10% 0%;
-}
-
+/* TEXT SETTINGS */
 ul li {
     margin: 5px 5px 5px 0px;
     background: #f5f5f5;
@@ -201,7 +164,7 @@ input[type="radio"] {
 }
 
 .correct-answer {
-    margin: 0 0 0 2%;
+    margin: 0 0 0 5%;
     padding: 0; 
 }
 
@@ -217,20 +180,16 @@ input[type="radio"] {
     text-align: center;
     margin: auto;
     padding: 2%;
+    white-space: nowrap;
 }
     
 .scorecard p {
     display: inline;
 }
 
-.scorecard p #score {
-
-}
-
 .scorecard p#question {
     padding-right: 20px;
 }
-
 
 numQuestion, .numScore {
     font-size: 110%;
@@ -241,11 +200,7 @@ numQuestion, .numScore {
   
 /* BUTTONS */
 .button {
-    cursor: pointer;
 	display: inline-block;
-    /*margin: 4%;*/
-    /*text-align: center;*/
-    /*margin: auto;*/
     width: 35%;
 	box-shadow: inset 0px 1px 0px 0px #ffffff;
 	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
@@ -264,44 +219,6 @@ numQuestion, .numScore {
     z-index: 100;
 }
 
-#submit {
-    /*width: 150px;*/
-    /*width: 35%;*/
-    /*margin: 4% 0 0 0;*/
-    /*margin: auto;*/
-    /*display: inline-block;*/
-    /*padding: 3% 3% 2% 2%;*/
-    /*text-align: center;*/
-    /*margin: 4% auto;*/
-}
-
-#next {
-    /*display: inline-block;*/
-    /*padding: 3% 3% 2% 2%;*/
-    /*margin: 4% auto;*/
-}
-
-.button-backup {
-    cursor: pointer;
-	display: inline-block;
-    margin: 4%;
-    width: 35%;
-	box-shadow: inset 0px 1px 0px 0px #ffffff;
-	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-	background-color:#ededed;
-    border-radius: 0.43em;
-	border: 1px solid #dcdcdc;
-    cursor: pointer;
-    color: black;
-	font-family:Arial;
-	font-size: 1.25em;
-	font-weight:bold;
-    padding: 3% 3% 2% 2%;
-	text-decoration:none;
-    text-shadow:0px 1px 0px #ffffff;
-    margin: 4% 0 0 0;
-}
-
 .button:hover {
 	background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
 	background-color:#dfdfdf;
@@ -313,11 +230,21 @@ numQuestion, .numScore {
 	color: royalblue;
 }
 
+
+
+
+
+
+
+
+
+
+
+/* RESIZE SCREENS USING MEDIA QUERIES */
 /* Small phone screens */
 @media only screen and (max-width: 600px) 
   {
 
-  
 }
   
 /* Large phone screens and portrait tablets */

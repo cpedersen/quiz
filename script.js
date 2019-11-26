@@ -143,29 +143,31 @@ function renderNewQuestionAndOptions() {
 function renderButton(option) {
     console.log("renderButton: Rendering button: " + option);
     let buttonHtml = "";
-    if (option === "start") {
-        buttonHtml = $(`
-            <button id="start" type="button" class="button">Start</button>
-        `);
-        $('#restart').hide();
-    } else if (option === "next") {
+    if (option === "next") {
+        console.log("renderButton: Changing Submit button to Next button");
         buttonHtml = $(`
             <button id="next" type="button" class="button">Next</button>
         `);
         $('#submit').hide();
-        //TODO - fix this
-        //$('#dark-money').append(buttonHtml);
+        $('#quiz-form').append(buttonHtml);
     } else if (option === "start") {
+        console.log("renderButton: Changing Restart button to Start button");
         buttonHtml = $(`
             <button id="start" type="button" class="button">Start</button>
         `);
+
+        $('#restart').hide();
+        $('#quiz-form').append(buttonHtml);
+
     } else if (option === "restart") {
+        console.log("renderButton: Changing Next button to Restart button");
         buttonHtml = $(`
             <button id="restart" type="button" class="button">Restart</button>
         `);
         $('#next').hide();
+        //$('#dark-money').append(buttonHtml);
+        $('#quiz-form').append(buttonHtml);
     }
-    $('#dark-money').append(buttonHtml);
 }
 
 function renderAnswer(answer) {
@@ -196,6 +198,7 @@ function renderRightAnswer() {
 
     //insert html into the dom
     $('h2').html(headerHtml);
+    $('#dark-money').addClass('great-job');
     $('#dark-money').append(answerHtml);
 }
 
@@ -247,7 +250,12 @@ function renderLostResult() {
     //insert html into the dom
     $('h2').html(headerHtml);
     $('#dark-money').empty();
+    //YOUAREHERE
+    $('#dark-money').removeClass('great-job')
+    $('#dark-money').removeClass('uh-oh-box');
+    $('#dark-money').removeClass('inner-container');
     $('#dark-money').addClass('black-box');
+    $('#dark-money').addClass('you-lost-box');
     $('#dark-money').append(imgHtml);
 }
 
@@ -262,11 +270,15 @@ function renderWonResult() {
     //insert html into the dom
     $('h2').html(headerHtml);
     $('#dark-money').empty();
+    $('#dark-money').removeClass('great-job');
+    $('#dark-money').removeClass('uh-oh-box');
+    $('#dark-money').removeClass('inner-container');
+    $('#dark-money').addClass('you-won-box');
     $('#dark-money').append(imgHtml);
 }
 
 function renderStartPage() {
-    console.log("renderStartPage: Rendering start page");
+    console.log("renderStartPage: Rendering start page again");
     //generate the html to display
     const headerHtml = "Can you save our Democracy?";
     const imgHtml = $(`
@@ -277,7 +289,12 @@ function renderStartPage() {
     //insert html into the dom
     $('h2').html(headerHtml);
     $('#dark-money').empty();
+    $('#dark-money').addClass('inner-container');
     $('#dark-money').append(imgHtml);
+    //YOUAREHERE
+    $('#dark-money').removeClass('great-job');
+    $('#dark-money').removeClass('you-won-box');
+    $('#dark-money').removeClass('you-lost-box');
     $('#dark-money').addClass('black-box');
     renderButton('start');
 }

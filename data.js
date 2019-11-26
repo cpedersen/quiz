@@ -5,15 +5,15 @@ const DATA = {
     questionNum: 1,
     questions: [
         {
-            question: "Question 1",
-            options: ["Answer A - Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do!", "Answer B", "Answer C", "Answer D"],
-            correctAnswer: ["Answer C"]
+            question: "What is \"dark money\"?",
+            options: ["Campaign money whose sources are not disclosed.", "Taxes paid anonymously by corporate interests.", "Money funneled via super PACs (political action committees) to billionaries.", "Oil money used to fight climate change."],
+            correctAnswer: ["Campaign money whose sources are not disclosed."]
         },
 
         {
-            question: "Question 2",
-            options: ["Question 2: Answer A Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do! Yabba Dabba Do!", "Question 2: Answer B", "Question 2: Answer C", "Question 2: Answer D"],
-            correctAnswer: ["Question 2: Answer A"]
+            question: "Why is dark money a problem in the U.S.?",
+            options: ["It prevents anonymous donations to political campaigns.", "It makes it harder to detect violations of campaign finance law.", "It keeps voters from the polls.", "It gives voters access to information on who is influencing candidates for political office."],
+            correctAnswer: ["It makes it harder to detect violations of campaign finance law."]
         },
 
     ]
