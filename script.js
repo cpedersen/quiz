@@ -45,7 +45,10 @@ function listenRestartButton() {
         console.log("listenRestartButton: Restart button selected");
         resetScore();
         resetQuestion();
-        renderNewQuestionAndOptions();
+        //NOTE: Decided to send user to initial page.
+        renderStartPage();
+        renderScorecard();
+        //renderNewQuestionAndOptions();
         listenStartButton();
     });
 }
@@ -86,7 +89,6 @@ function renderQuestion() {
     const questionAndOptions = DATA.questions[DATA.questionIndex];
     const questionText = questionAndOptions.question;
     console.log("renderQuestion: questionText = " + questionText);
-    //YOUAREHERE1
     $('h2').html(questionText);
 }
 
@@ -270,7 +272,6 @@ function renderWonResult() {
     $('#dark-money').append(imgHtml);
 }
 
-//TODO - delete this function if I decide not to send user to Start page
 function renderStartPage() {
     console.log("renderStartPage: Rendering start page again");
     //generate the html to display
