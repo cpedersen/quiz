@@ -1,4 +1,4 @@
-const DATA = {
+const TEST = {
     //store the quiz score, the question we're on, and the questions/options
     score: 0,
     questionIndex: 0,
@@ -20,7 +20,7 @@ const DATA = {
 };
 
 
-const TEST = {
+const DATA = {
     //store the quiz score, the question we're on, and the questions/options
     score: 0,
     questionIndex: 0,
