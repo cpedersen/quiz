@@ -4,7 +4,7 @@
 }
   
 html {
-    font-size: 1.15em;
+    font-size: 1em;
     font-family: 'Lucida Sans';
 }
 
@@ -207,7 +207,7 @@ numQuestion, .numScore {
     cursor: pointer;
     color: black;
 	font-family: Arial;
-	font-size: 1.25em;
+	font-size: 1.15em;
 	font-weight:bold;
     padding: 3% 3% 2% 2%;
 	text-decoration: none;
