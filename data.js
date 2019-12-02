@@ -47,7 +47,7 @@ const DATA = {
 
         {
             question: "Which Supreme Court decision led to the rise of dark money?",
-            options: ["In United States v. Harriss (1954), the Supreme Court ruled that the Regulation of Lobbying Act was constitutional.", "In Citizens United v. Federal Election Commission (2010), the Supreme Court ruled that the free speech clause of the First Amendment prohibited the government from restricting corporation and union spending on political campaigns.", "In SpeechNow.org v. FEC (2010), the U.S. District Court for the District of Columbia ruled that the FEC could no longer enforce contribution limits to independent groups.", "All of the above."],
+            options: ["In United States v. Harriss (1954), the Supreme Court ruled that the Regulation of Lobbying Act was constitutional.", "In Citizens United v. Federal Election Commission (2010), the Supreme Court ruled that the free speech clause of the First Amendment prohibited the government from restricting corporate spending on political campaigns.", "In SpeechNow.org v. FEC (2010), the U.S. District Court for the District of Columbia ruled that the FEC could no longer enforce contribution limits to independent groups.", "All of the above."],
             correctAnswer: ["In Citizens United v. Federal Election Commission (2010), the Supreme Court ruled that the free speech clause of the First Amendment prohibited the government from restricting corporation and union spending on political campaigns."]
         },
 
