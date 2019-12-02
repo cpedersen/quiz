@@ -24,22 +24,15 @@ header h1 {
 }
 
 h2 {
-    font-size: 1.3em;
+    font-size: 1.1em;
     margin: 0.83em 0 0 0;
     font-weight: bold;
     text-align: center;
     line-height: 1;
-    /*white-space: nowrap;*/
+    white-space: nowrap;
 }
 
 /* SCREEN CONTAINERS */
-#quiz-form-section {
-    display: flex;
-    align-content: space-around;
-    align-items: center;
-    flex-direction: column;
-}
-
 #quiz-form {
     display: flex;
     flex-grow: 1;
@@ -47,7 +40,6 @@ h2 {
     align-items: center;
     align-content: space-around;
     justify-content: space-around;
-    padding: 5% 5% 5% 5%;
 }
 
 .start-quiz {
@@ -57,11 +49,11 @@ h2 {
 
 .outer-container {
     margin: 1em auto auto auto;
-    height: 600px;
+    height: 650px;
     width: 500px;
     background-image: url('images/Background.png');
     background-position: center;
-    padding: 1%;
+    padding: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,52 +61,63 @@ h2 {
     justify-content: space-around;
 }
 
-.start-box {
-    flex-direction: column;
-    margin: auto auto 12%;
-    text-align: left;
-    height: 450px;
-    width: 95%;
-    background: white;
-    border: 1px black solid;
-}
-
 .inner-container {
-    flex-direction: column;
-    margin: auto auto 12%;
+    margin: auto;
     text-align: left;
+    height: 500px;
     width: 95%;
     background: white;
     border: 1px black solid;
 }
 
 .black-box {
+    display: flex;
     flex-direction: column;
     align-items: center;
     background: black;
 }
 
-#dark-money {
+.uh-oh-box {
+    display: block;
+    margin: auto;
+    padding: 0px;
+}
+
+.great-job {
+    width: 110%;
+    background: white;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    margin: auto;
 }
 
 .you-lost-box {
+    width: 350px;
     height: 450px;
+    justify-content: center;
+}
+
+.you-won-box {
+    display: flex;
+    width: 140%;
+    flex-direction: column;
+    align-items: center;
+    background: white;
 }
 
 /* IMG SETTINGS */
 .youWonImg {
-    margin: auto;
-    height: 110%;
-    width: 100%;
+    margin: 7% 4% 7% 4%;
+    width: 90%;
  }
 
 .youLostImg {
-    height: 95%;
+    margin: 7% 4% 7% 4%;
 }
 
 .WomanLightImg {
-    height: 90%;
+    margin: 10% 5%;
 }
 
 .UhOhImg {
@@ -212,7 +215,7 @@ numQuestion, .numScore {
     padding: 3% 3% 2% 2%;
 	text-decoration: none;
     text-shadow: 0px 1px 0px #ffffff;
-    margin: auto;
+    margin: 4% auto;
     z-index: 100;
 }
 
@@ -229,87 +232,57 @@ numQuestion, .numScore {
 
 
 
+
+
+
+
+
+
+
+
 /* RESIZE SCREENS USING MEDIA QUERIES */
 /* Small phone screens */
-@media only screen and (min-width: 320px) 
+@media only screen and (max-width: 600px) 
   {
+
     html {
         font-size: 1em;
+        font-family: 'Lucida Sans';
     }
     
     header h1 {
-        font-size: 1.3em;
+        font-size: 1.2em;
     }
     
     h2 {
-        font-size: 1.1em;
+        font-size: 1em;
     }
-    
+
+    .button {
+        font-size: 1em;
+    }
+
     .outer-container {
-        margin: 1em auto auto auto;
-        height: 95%;
-        width: 95%;
-        padding: 1%;
+        width: auto;
     }
-    
-    .start-box {
-        margin: auto;
-        height: 90%;
-        width: 90%;
-    }
-    
-    .inner-container {
-        margin: auto auto 12%;
-        width: 95%;
-    }
-    
-    .you-lost-box {
-        height: 95%;
-    }
-    
-    .youWonImg {
-        margin: auto;
-        height: 95%;
-     }
-    
-    .youLostImg {
-        height: 95%;
-    }
-    
-    .WomanLightImg {
-        height: 300px;
-    }
-    
-    .UhOhImg {
-        margin: 5% 0% 5% 9.5%;
-        width: 80%;
-    }
-    
-    .darkMoneyImg {
-        width: 90%;
-        height: auto;
-        margin: 10% 10% 2% 10%;
-    }
-      
-    .eleanorQuoteImg {
-        width: 90%;
-        height: auto;
-        margin: auto;
+
+    #dark-money {
+        width: auto;
     }
 }
-
-
   
 /* Large phone screens and portrait tablets */
 @media only screen and (min-width:600px) 
   {
 
+  
 }
   
   /* Landscape tablets */
 @media only screen and (min-width:768px) 
   {
 
+  
 }
   
   /* Laptops/desktops */
@@ -320,3 +293,10 @@ numQuestion, .numScore {
 
 
 
+
+
+
+
+
+
+ 

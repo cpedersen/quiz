@@ -109,16 +109,21 @@ function renderNewQuestionAndOptions() {
     const optionsArr = questionAndOptions.options;
     console.log("renderNewQuestionAndOptions: optionsArr = " + optionsArr);
 
-    //TODO - do I need to add the question inside a fieldset?
+    //TODO - how add question to the form below so that it shows up as an h2 at top of screen?
     const questionHtml = $(`
     <fieldset>
         <legend class="question-text">${questionText}>/legend>
     </fieldset>`);
 
     //create question/options quiz form
+    //TODO - should I keep this fieldset even though it messes up my original formatting?
     const formHtml = $(`
     <form role="form" id="quiz-form" class="quiz-form">
         <section id="dark-money" class="inner-container">
+            <fieldset>
+            <legend>
+                <h2 id="h2-header" class="h2-democracy h2-question">Does this work?</h2>
+            </legend>
                 <p id="select-answer" class="select-answer">Select the correct answer:</p>
                 <ul id="list-options" style="list-style-type:none;">
                     <li><input type="radio" name="options" id="option" value="${optionsArr[0]}"
@@ -130,8 +135,9 @@ function renderNewQuestionAndOptions() {
                     <li><input type="radio" name="options" id="option" value="${optionsArr[3]}"
                 required>${optionsArr[3]}</li>
                 </ul>
+                <button id="submit" type="submit" class="button">Submit</button>
+            </fieldset>
         </section>
-        <button id="submit" type="submit" class="button">Submit</button>
     </form>
     `);
 
@@ -165,6 +171,7 @@ function renderButton(option) {
             <button id="restart" type="button" class="button">Restart</button>
         `);
         $('#next').hide();
+        //$('#dark-money').append(buttonHtml);
         $('#quiz-form').append(buttonHtml);
     }
 }
@@ -197,7 +204,7 @@ function renderRightAnswer() {
 
     //insert html into the dom
     $('h2').html(headerHtml);
-    $('#dark-money').removeClass('inner-container');
+    $('#dark-money').addClass('great-job');
     $('#dark-money').append(answerHtml);
 }
 
@@ -220,7 +227,7 @@ function renderWrongAnswer() {
     `);
 
     //insert html into the dom
-    $('#dark-money').removeClass('black-box');
+    $('#dark-money').addClass('uh-oh-box');
     $('h2').html(headerHtml);
     $('#dark-money').append(answerHtml);
 }
@@ -249,7 +256,10 @@ function renderLostResult() {
     //insert html into the dom
     $('h2').html(headerHtml);
     $('#dark-money').empty();
+    $('#dark-money').removeClass('great-job')
+    $('#dark-money').removeClass('uh-oh-box');
     $('#dark-money').removeClass('inner-container');
+    $('#dark-money').addClass('black-box');
     $('#dark-money').addClass('you-lost-box');
     $('#dark-money').append(imgHtml);
 }
@@ -265,6 +275,8 @@ function renderWonResult() {
     //insert html into the dom
     $('h2').html(headerHtml);
     $('#dark-money').empty();
+    $('#dark-money').removeClass('great-job');
+    $('#dark-money').removeClass('uh-oh-box');
     $('#dark-money').removeClass('inner-container');
     $('#dark-money').addClass('you-won-box');
     $('#dark-money').append(imgHtml);
@@ -285,6 +297,8 @@ function renderStartPage() {
     $('#dark-money').empty();
     $('#dark-money').addClass('inner-container');
     $('#dark-money').append(imgHtml);
+    $('#dark-money').removeClass('great-job');
+    $('#dark-money').removeClass('you-won-box');
     $('#dark-money').removeClass('you-lost-box');
     $('#dark-money').addClass('black-box');
     renderButton('start');
