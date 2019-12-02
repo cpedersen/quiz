@@ -47,7 +47,7 @@ function listenRestartButton() {
         resetQuestion();
         //NOTE: Decided to send user to initial page.
         renderStartPage();
-        renderScorecard();
+        renderScorecard('hide');
         //renderNewQuestionAndOptions();
         listenStartButton();
     });
